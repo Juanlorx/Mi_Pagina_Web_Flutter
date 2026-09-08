@@ -18,11 +18,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController rethusController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController =
+      TextEditingController();
 
-  String? rolSeleccionado; 
+  final TextEditingController rethusController =
+      TextEditingController();
+
+  final TextEditingController passwordController =
+      TextEditingController();
+
   String? mensajeError;
 
   @override
@@ -34,23 +38,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   void login() {
-  if (_formKey.currentState!.validate()) {
-    setState(() {
-      mensajeError = null;
-    });
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        mensajeError = null;
+      });
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const MenuPage(),
-      ),
-    );
-  } else {
-    setState(() {
-      mensajeError = "Complete todos los campos.";
-    });
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MenuPage(),
+        ),
+      );
+    } else {
+      setState(() {
+        mensajeError = "Complete todos los campos.";
+      });
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +80,17 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               width: AppSizes.containerWidth,
 
-              padding: const EdgeInsets.all(AppSizes.padding),
+              padding: const EdgeInsets.all(
+                AppSizes.padding,
+              ),
 
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(AppSizes.containerRadius),
+
+                borderRadius: BorderRadius.circular(
+                  AppSizes.containerRadius,
+                ),
+
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
@@ -95,48 +104,75 @@ class _HomePageState extends State<HomePage> {
                 key: _formKey,
 
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.stretch,
+
                   children: [
 
+                    // ================= LOGO =================
+
                     Center(
-  child: Image.asset(
-    'assets/images/nurse_logo.png',
-    width: 180,
-    height: 180,
-    fit: BoxFit.contain,
-    errorBuilder: (context, error, stackTrace) {
-      return Container(
-        width: 180,
-        height: 180,
-        alignment: Alignment.center,
-        child: const Text(
-          'Error al cargar el logo',
-          style: TextStyle(
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      );
-    },
-  ),
-),
+                      child: Image.asset(
+                        'assets/images/nurse_logo.png',
+
+                        width: 180,
+                        height: 180,
+
+                        fit: BoxFit.contain,
+
+                        errorBuilder:
+                            (context, error, stackTrace) {
+                          return Container(
+                            width: 180,
+                            height: 180,
+
+                            alignment: Alignment.center,
+
+                            child: const Text(
+                              'Error al cargar el logo',
+
+                              textAlign:
+                                  TextAlign.center,
+
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight:
+                                    FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+
                     const SizedBox(height: 15),
+
+                    // ================= TITULO =================
 
                     const Text(
                       "Iniciar Sesión",
+
                       textAlign: TextAlign.center,
+
                       style: AppTextStyles.titulo,
                     ),
 
                     const SizedBox(height: 25),
 
+                    // ================= MENSAJE ERROR =================
+
                     if (mensajeError != null)
                       Container(
-                        padding: const EdgeInsets.all(12),
+                        padding:
+                            const EdgeInsets.all(12),
 
                         decoration: BoxDecoration(
-                          color: AppColors.errorBackground,
-                          borderRadius: BorderRadius.circular(8),
+                          color:
+                              AppColors.errorBackground,
+
+                          borderRadius:
+                              BorderRadius.circular(8),
+
                           border: Border.all(
                             color: AppColors.error,
                           ),
@@ -144,10 +180,16 @@ class _HomePageState extends State<HomePage> {
 
                         child: Text(
                           mensajeError!,
-                          textAlign: TextAlign.center,
+
+                          textAlign:
+                              TextAlign.center,
+
                           style: const TextStyle(
-                            color: AppColors.error,
-                            fontWeight: FontWeight.bold,
+                            color:
+                                AppColors.error,
+
+                            fontWeight:
+                                FontWeight.bold,
                           ),
                         ),
                       ),
@@ -155,124 +197,122 @@ class _HomePageState extends State<HomePage> {
                     if (mensajeError != null)
                       const SizedBox(height: 15),
 
+                    // ================= CORREO =================
+
                     TextFormField(
                       controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
+
+                      keyboardType:
+                          TextInputType.emailAddress,
+
+                      decoration:
+                          const InputDecoration(
                         labelText: "Correo",
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon:
+                            Icon(Icons.email),
                       ),
+
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su correo";
                         }
+
                         return null;
                       },
                     ),
 
                     const SizedBox(height: 15),
+
+                    // ================= RETHUS =================
 
                     TextFormField(
                       controller: rethusController,
-                      decoration: const InputDecoration(
+
+                      decoration:
+                          const InputDecoration(
                         labelText: "Rethus",
-                        prefixIcon: Icon(Icons.badge),
+                        prefixIcon:
+                            Icon(Icons.badge),
                       ),
+
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su Rethus";
                         }
+
                         return null;
                       },
                     ),
 
                     const SizedBox(height: 15),
+
+                    // ================= CONTRASEÑA =================
 
                     TextFormField(
-                      controller: passwordController,
+                      controller:
+                          passwordController,
+
                       obscureText: true,
-                      decoration: const InputDecoration(
+
+                      decoration:
+                          const InputDecoration(
                         labelText: "Contraseña",
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon:
+                            Icon(Icons.lock),
                       ),
+
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su contraseña";
                         }
-                        return null;
-                      },
-                    ),
 
-                    const SizedBox(height: 15),
-
-                    DropdownButtonFormField<String>(
-                      value: rolSeleccionado,
-
-                      decoration: const InputDecoration(
-                        labelText: "Tipo de Usuario",
-                        prefixIcon: Icon(Icons.person),
-                      ),
-
-                      items: const [
-
-                        DropdownMenuItem(
-                          value: "1",
-                          child: Text("Administrador"),
-                        ),
-
-                        DropdownMenuItem(
-                          value: "2",
-                          child: Text("Enfermero"),
-                        ),
-
-                      ],
-
-                      onChanged: (value) {
-                        setState(() {
-                          rolSeleccionado = value;
-                        });
-                      },
-
-                      validator: (value) {
-                        if (value == null) {
-                          return "Seleccione un rol";
-                        }
                         return null;
                       },
                     ),
 
                     const SizedBox(height: 25),
 
-                   CustomButton(
-                   text: "Ingresar",
-                    onPressed: login,
+                    // ================= BOTÓN =================
+
+                    CustomButton(
+                      text: "Ingresar",
+                      onPressed: login,
                     ),
 
                     const SizedBox(height: 15),
 
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/recuperacion',
-                          );
-                        },
-                        child: const Text(
-                          "¿Olvidaste tu contraseña?",
-                        ),
-                      ),
+                    // ================= RECUPERAR =================
 
-                                        TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/registro',
-                          );
-                        },
-                        child: const Text(
-                          "Crear Cuenta",
-                        ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/recuperacion',
+                        );
+                      },
+
+                      child: const Text(
+                        "¿Olvidaste tu contraseña?",
                       ),
+                    ),
+
+                    // ================= REGISTRO =================
+
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/registro',
+                        );
+                      },
+
+                      child: const Text(
+                        "Crear Cuenta",
+                      ),
+                    ),
                   ],
                 ),
               ),

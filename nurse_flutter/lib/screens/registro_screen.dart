@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../styles/app_colors.dart';
 import '../styles/app_sizes.dart';
 import '../styles/app_text_styles.dart';
+
 import '../widgets/custom_button.dart';
 
 class RegistroScreen extends StatefulWidget {
@@ -15,14 +16,29 @@ class RegistroScreen extends StatefulWidget {
 class _RegistroScreenState extends State<RegistroScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController nombreController = TextEditingController();
-  final TextEditingController apellidoController = TextEditingController();
-  final TextEditingController documentoController = TextEditingController();
-  final TextEditingController telefonoController = TextEditingController();
-  final TextEditingController direccionController = TextEditingController();
-  final TextEditingController rethusController = TextEditingController();
-  final TextEditingController correoController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nombreController =
+      TextEditingController();
+
+  final TextEditingController apellidoController =
+      TextEditingController();
+
+  final TextEditingController documentoController =
+      TextEditingController();
+
+  final TextEditingController telefonoController =
+      TextEditingController();
+
+  final TextEditingController direccionController =
+      TextEditingController();
+
+  final TextEditingController rethusController =
+      TextEditingController();
+
+  final TextEditingController correoController =
+      TextEditingController();
+
+  final TextEditingController passwordController =
+      TextEditingController();
 
   String? tipoDocumento;
   bool aceptaPolitica = false;
@@ -37,6 +53,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
     rethusController.dispose();
     correoController.dispose();
     passwordController.dispose();
+
     super.dispose();
   }
 
@@ -45,15 +62,20 @@ class _RegistroScreenState extends State<RegistroScreen> {
       if (!aceptaPolitica) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Debe aceptar la política de datos."),
+            content: Text(
+              "Debe aceptar la política de datos.",
+            ),
           ),
         );
+
         return;
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Usuario registrado correctamente."),
+          content: Text(
+            "Usuario registrado correctamente.",
+          ),
         ),
       );
 
@@ -66,7 +88,6 @@ class _RegistroScreenState extends State<RegistroScreen> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -77,20 +98,19 @@ class _RegistroScreenState extends State<RegistroScreen> {
             ],
           ),
         ),
-
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
-
             child: Container(
               width: AppSizes.containerWidth,
-
-              padding: const EdgeInsets.all(AppSizes.padding),
-
+              padding: const EdgeInsets.all(
+                AppSizes.padding,
+              ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(AppSizes.containerRadius),
+                borderRadius: BorderRadius.circular(
+                  AppSizes.containerRadius,
+                ),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
@@ -99,20 +119,34 @@ class _RegistroScreenState extends State<RegistroScreen> {
                   ),
                 ],
               ),
-
               child: Form(
                 key: _formKey,
-
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-
+                  crossAxisAlignment:
+                      CrossAxisAlignment.stretch,
                   children: [
-
                     Center(
                       child: Image.asset(
                         "assets/images/nurse_logo.png",
                         width: 140,
                         height: 140,
+                        fit: BoxFit.contain,
+                        errorBuilder:
+                            (context, error, stackTrace) {
+                          return Container(
+                            width: 140,
+                            height: 140,
+                            alignment: Alignment.center,
+                            child: const Text(
+                              "Error al cargar el logo",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
 
@@ -133,9 +167,11 @@ class _RegistroScreenState extends State<RegistroScreen> {
                         prefixIcon: Icon(Icons.person),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su nombre";
                         }
+
                         return null;
                       },
                     ),
@@ -146,12 +182,15 @@ class _RegistroScreenState extends State<RegistroScreen> {
                       controller: apellidoController,
                       decoration: const InputDecoration(
                         labelText: "Apellido",
-                        prefixIcon: Icon(Icons.person_outline),
+                        prefixIcon:
+                            Icon(Icons.person_outline),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su apellido";
                         }
+
                         return null;
                       },
                     ),
@@ -159,42 +198,47 @@ class _RegistroScreenState extends State<RegistroScreen> {
                     const SizedBox(height: 15),
 
                     DropdownButtonFormField<String>(
-                      value: tipoDocumento,
-
+                      initialValue: tipoDocumento,
                       decoration: const InputDecoration(
                         labelText: "Tipo de documento",
                         prefixIcon: Icon(Icons.badge),
                       ),
-
                       items: const [
                         DropdownMenuItem(
                           value: "CC",
-                          child: Text("Cédula de ciudadanía"),
+                          child: Text(
+                            "Cédula de ciudadanía",
+                          ),
                         ),
                         DropdownMenuItem(
                           value: "TI",
-                          child: Text("Tarjeta de identidad"),
+                          child: Text(
+                            "Tarjeta de identidad",
+                          ),
                         ),
                         DropdownMenuItem(
                           value: "CE",
-                          child: Text("Cédula de extranjería"),
+                          child: Text(
+                            "Cédula de extranjería",
+                          ),
                         ),
                         DropdownMenuItem(
                           value: "PAS",
-                          child: Text("Pasaporte"),
+                          child: Text(
+                            "Pasaporte",
+                          ),
                         ),
                       ],
-
                       onChanged: (value) {
                         setState(() {
                           tipoDocumento = value;
                         });
                       },
-
                       validator: (value) {
                         if (value == null) {
                           return "Seleccione un tipo";
                         }
+
                         return null;
                       },
                     ),
@@ -204,20 +248,22 @@ class _RegistroScreenState extends State<RegistroScreen> {
                     TextFormField(
                       controller: documentoController,
                       keyboardType: TextInputType.number,
-
                       decoration: const InputDecoration(
                         labelText: "Número de documento",
-                        prefixIcon: Icon(Icons.credit_card),
+                        prefixIcon:
+                            Icon(Icons.credit_card),
                       ),
-
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese el documento";
                         }
+
                         return null;
                       },
                     ),
-                                        const SizedBox(height: 15),
+
+                    const SizedBox(height: 15),
 
                     TextFormField(
                       controller: telefonoController,
@@ -227,9 +273,11 @@ class _RegistroScreenState extends State<RegistroScreen> {
                         prefixIcon: Icon(Icons.phone),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su teléfono";
                         }
+
                         return null;
                       },
                     ),
@@ -240,12 +288,15 @@ class _RegistroScreenState extends State<RegistroScreen> {
                       controller: direccionController,
                       decoration: const InputDecoration(
                         labelText: "Dirección",
-                        prefixIcon: Icon(Icons.location_on),
+                        prefixIcon:
+                            Icon(Icons.location_on),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su dirección";
                         }
+
                         return null;
                       },
                     ),
@@ -260,9 +311,11 @@ class _RegistroScreenState extends State<RegistroScreen> {
                         prefixIcon: Icon(Icons.badge),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su RETHUS";
                         }
+
                         return null;
                       },
                     ),
@@ -271,13 +324,15 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
                     TextFormField(
                       controller: correoController,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType:
+                          TextInputType.emailAddress,
                       decoration: const InputDecoration(
                         labelText: "Correo electrónico",
                         prefixIcon: Icon(Icons.email),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese su correo";
                         }
 
@@ -299,7 +354,8 @@ class _RegistroScreenState extends State<RegistroScreen> {
                         prefixIcon: Icon(Icons.lock),
                       ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value == null ||
+                            value.isEmpty) {
                           return "Ingrese una contraseña";
                         }
 
@@ -310,22 +366,23 @@ class _RegistroScreenState extends State<RegistroScreen> {
                         return null;
                       },
                     ),
-                                        const SizedBox(height: 20),
+
+                    const SizedBox(height: 20),
 
                     CheckboxListTile(
                       value: aceptaPolitica,
-
                       controlAffinity:
                           ListTileControlAffinity.leading,
-
                       title: const Text(
-                        "Acepto la política de tratamiento de datos personales",
-                        style: TextStyle(fontSize: 14),
+                        "Acepto la política de tratamiento "
+                        "de datos personales",
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
                       ),
-
                       onChanged: (value) {
                         setState(() {
-                          aceptaPolitica = value!;
+                          aceptaPolitica = value ?? false;
                         });
                       },
                     ),

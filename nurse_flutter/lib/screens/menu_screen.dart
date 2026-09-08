@@ -13,6 +13,8 @@ class MenuPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
 
+      // ================= APPBAR =================
+
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         elevation: 0,
@@ -31,21 +33,24 @@ class MenuPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login');
+              Navigator.pushReplacementNamed(
+                context,
+                '/login',
+              );
             },
           ),
         ],
       ),
 
+      // ================= MENÚ LATERAL =================
+
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
+
           children: [
-
             DrawerHeader(
-
               decoration: const BoxDecoration(
-
                 gradient: LinearGradient(
                   colors: [
                     AppColors.primary,
@@ -55,9 +60,10 @@ class MenuPage extends StatelessWidget {
               ),
 
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                mainAxisAlignment:
+                    MainAxisAlignment.center,
 
+                children: [
                   Image.asset(
                     "assets/images/nurse_logo.png",
                     height: 90,
@@ -79,58 +85,81 @@ class MenuPage extends StatelessWidget {
               ),
             ),
 
+            // ================= INICIO =================
+
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text("Inicio"),
-              onTap: () {},
+
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
+
+            // ================= PACIENTES =================
 
             ListTile(
               leading: const Icon(Icons.people),
               title: const Text("Pacientes"),
+
               onTap: () {
-                Navigator.pushNamed(context, '/pacientes');
+                Navigator.pop(context);
+
+                Navigator.pushNamed(
+                  context,
+                  '/pacientes',
+                );
               },
             ),
 
+            // ================= CALENDARIO =================
+
             ListTile(
-              leading: const Icon(Icons.calendar_month),
+              leading:
+                  const Icon(Icons.calendar_month),
+
               title: const Text("Calendario"),
-              onTap: () {
-                Navigator.pushNamed(context, '/calendario');
-              },
-            ),
 
-            ListTile(
-              leading: const Icon(Icons.dashboard),
-              title: const Text("Panel"),
               onTap: () {
-                Navigator.pushNamed(context, '/panel');
+                Navigator.pop(context);
+
+                Navigator.pushNamed(
+                  context,
+                  '/calendario',
+                );
               },
             ),
 
             const Divider(),
 
+            // ================= CERRAR SESIÓN =================
+
             ListTile(
               leading: const Icon(Icons.logout),
+
               title: const Text("Cerrar sesión"),
+
               onTap: () {
-                Navigator.pushReplacementNamed(context, '/login');
+                Navigator.pushReplacementNamed(
+                  context,
+                  '/login',
+                );
               },
             ),
           ],
         ),
       ),
 
-      body: Container(
+      // ================= CONTENIDO =================
 
+      body: Container(
         width: double.infinity,
 
         decoration: const BoxDecoration(
-
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
+
             colors: [
               AppColors.primary,
               AppColors.secondary,
@@ -139,23 +168,25 @@ class MenuPage extends StatelessWidget {
         ),
 
         child: SingleChildScrollView(
-
           padding: const EdgeInsets.all(20),
 
           child: Column(
-
             children: [
 
-              Container(
+              // ================= BIENVENIDA =================
 
+              Container(
                 width: double.infinity,
 
-                padding: const EdgeInsets.all(AppSizes.padding),
+                padding:
+                    const EdgeInsets.all(
+                  AppSizes.padding,
+                ),
 
-                decoration: AppDecoration.loginContainer,
+                decoration:
+                    AppDecoration.loginContainer,
 
                 child: Column(
-
                   children: [
 
                     Image.asset(
@@ -167,14 +198,16 @@ class MenuPage extends StatelessWidget {
 
                     const Text(
                       "Bienvenido a NURSE",
-                      style: AppTextStyles.titulo,
+                      style:
+                          AppTextStyles.titulo,
                     ),
 
                     const SizedBox(height: 15),
 
                     const Text(
                       "Sistema para la gestión de pacientes y atención domiciliaria.",
-                      textAlign: TextAlign.center,
+                      textAlign:
+                          TextAlign.center,
                     ),
                   ],
                 ),
@@ -182,49 +215,112 @@ class MenuPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              Container(
+              // ================= ACCESOS RÁPIDOS =================
 
+              Container(
                 width: double.infinity,
 
-                padding: const EdgeInsets.all(20),
+                padding:
+                    const EdgeInsets.all(20),
 
-                decoration: AppDecoration.loginContainer,
+                decoration:
+                    AppDecoration.loginContainer,
 
                 child: Column(
-
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
 
                   children: [
 
                     const Text(
-                      "Galería",
-                      style: AppTextStyles.titulo,
+                      "Accesos rápidos",
+                      style:
+                          AppTextStyles.titulo,
                     ),
 
                     const SizedBox(height: 20),
 
-                    GridView.count(
-
-                      shrinkWrap: true,
-
-                      physics: const NeverScrollableScrollPhysics(),
-
-                      crossAxisCount: 2,
-
-                      crossAxisSpacing: 15,
-
-                      mainAxisSpacing: 15,
-
+                    Row(
                       children: [
 
-                          imagenCard("assets/images/enfermera.jpg"),
+                        // PACIENTES
 
-                          imagenCard("assets/images/pastillas.jpg"),
+                        Expanded(
+                          child:
+                              ElevatedButton.icon(
+                            style:
+                                ElevatedButton
+                                    .styleFrom(
+                              backgroundColor:
+                                  AppColors
+                                      .primary,
 
-                          imagenCard("assets/images/tapabocas.jpg"),
+                              foregroundColor:
+                                  Colors.white,
 
-                          imagenCard("assets/images/pulso.jpg"),
+                              padding:
+                                  const EdgeInsets
+                                      .symmetric(
+                                vertical: 15,
+                              ),
+                            ),
 
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/pacientes',
+                              );
+                            },
+
+                            icon: const Icon(
+                              Icons.people,
+                            ),
+
+                            label: const Text(
+                              "Pacientes",
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(width: 15),
+
+                        // CALENDARIO
+
+                        Expanded(
+                          child:
+                              ElevatedButton.icon(
+                            style:
+                                ElevatedButton
+                                    .styleFrom(
+                              backgroundColor:
+                                  Colors.green,
+
+                              foregroundColor:
+                                  Colors.white,
+
+                              padding:
+                                  const EdgeInsets
+                                      .symmetric(
+                                vertical: 15,
+                              ),
+                            ),
+
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/calendario',
+                              );
+                            },
+
+                            icon: const Icon(
+                              Icons.calendar_month,
+                            ),
+
+                            label: const Text(
+                              "Calendario",
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -233,39 +329,181 @@ class MenuPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-             
-              const SizedBox(height: 30),
+              // ================= GALERÍA =================
 
               Container(
-
                 width: double.infinity,
 
-                padding: const EdgeInsets.all(20),
+                padding:
+                    const EdgeInsets.all(20),
 
-                decoration: AppDecoration.loginContainer,
+                decoration:
+                    AppDecoration.loginContainer,
 
                 child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
 
                   children: [
 
                     const Text(
+                      "Galería",
+                      style:
+                          AppTextStyles.titulo,
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    GridView.count(
+                      shrinkWrap: true,
+
+                      physics:
+                          const NeverScrollableScrollPhysics(),
+
+                      crossAxisCount: 2,
+
+                      crossAxisSpacing: 15,
+
+                      mainAxisSpacing: 15,
+
+                      children: [
+                        imagenCard(
+                          "assets/images/enfermera.jpg",
+                        ),
+
+                        imagenCard(
+                          "assets/images/pastillas.jpg",
+                        ),
+
+                        imagenCard(
+                          "assets/images/tapabocas.jpg",
+                        ),
+
+                        imagenCard(
+                          "assets/images/pulso.jpg",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              // ================= INFORMACIÓN =================
+
+              Container(
+                width: double.infinity,
+
+                padding:
+                    const EdgeInsets.all(20),
+
+                decoration:
+                    AppDecoration.loginContainer,
+
+                child: Column(
+                  children: [
+
+                    const Text(
                       "¿Qué es NURSE?",
-                      style: AppTextStyles.titulo,
+                      style:
+                          AppTextStyles.titulo,
                     ),
 
                     const SizedBox(height: 15),
 
                     const Text(
-
                       "NURSE es una plataforma desarrollada para apoyar a las enfermeras en la administración de pacientes, tratamientos, medicamentos, horarios y visitas domiciliarias.\n\n"
-
                       "Permite organizar toda la información clínica desde una sola aplicación, optimizando el tiempo y mejorando la atención de los pacientes.",
 
-                      textAlign: TextAlign.justify,
+                      textAlign:
+                          TextAlign.justify,
 
                       style: TextStyle(
                         fontSize: 16,
                         height: 1.7,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              // ================= CALENDARIO =================
+
+              Container(
+                width: double.infinity,
+
+                padding:
+                    const EdgeInsets.all(20),
+
+                decoration:
+                    AppDecoration.loginContainer,
+
+                child: Column(
+                  children: [
+
+                    const Icon(
+                      Icons.calendar_month,
+                      size: 70,
+                      color: Colors.green,
+                    ),
+
+                    const SizedBox(height: 15),
+
+                    const Text(
+                      "Agenda de Enfermería",
+                      style:
+                          AppTextStyles.titulo,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    const Text(
+                      "Consulta las citas programadas, registra nuevas visitas domiciliarias y organiza los horarios de atención.",
+
+                      textAlign:
+                          TextAlign.center,
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    SizedBox(
+                      width: double.infinity,
+
+                      child:
+                          ElevatedButton.icon(
+                        style:
+                            ElevatedButton
+                                .styleFrom(
+                          backgroundColor:
+                              Colors.green,
+
+                          foregroundColor:
+                              Colors.white,
+
+                          padding:
+                              const EdgeInsets
+                                  .symmetric(
+                            vertical: 15,
+                          ),
+                        ),
+
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/calendario',
+                          );
+                        },
+
+                        icon: const Icon(
+                          Icons.calendar_today,
+                        ),
+
+                        label: const Text(
+                          "Abrir Calendario",
+                        ),
                       ),
                     ),
                   ],
@@ -278,19 +516,30 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-    Widget imagenCard(String ruta) {
+  // ================= TARJETAS DE IMAGEN =================
+
+  static Widget imagenCard(String ruta) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius:
+          BorderRadius.circular(15),
+
       child: Image.asset(
         ruta,
+
         fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
+
+        errorBuilder:
+            (context, error, stackTrace) {
           return Container(
             color: Colors.red.shade100,
+
             alignment: Alignment.center,
+
             child: Text(
               "No se encontró:\n$ruta",
-              textAlign: TextAlign.center,
+
+              textAlign:
+                  TextAlign.center,
             ),
           );
         },
